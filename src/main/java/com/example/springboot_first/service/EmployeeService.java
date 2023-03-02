@@ -2,7 +2,6 @@ package com.example.springboot_first.service;
 
 import com.example.springboot_first.entity.Employee;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 public interface EmployeeService {

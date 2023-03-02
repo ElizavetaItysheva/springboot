@@ -1,48 +1,49 @@
 package com.example.springboot_first.service;
 
-import com.example.springboot_first.dao.EmployeeRepo;
+import com.example.springboot_first.dao.EmployeeDAO;
 import com.example.springboot_first.entity.Employee;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
-    private final EmployeeRepo employeeRepo;
+public class EmployeeServiceImpl implements EmployeeService{
+    private final EmployeeDAO employeeDAO;
 
-    public EmployeeServiceImpl( EmployeeRepo employeeRepo ) {
-        this.employeeRepo = employeeRepo;
+    public EmployeeServiceImpl(EmployeeDAO employeeDAO) {
+        this.employeeDAO = employeeDAO;
     }
 
 
     @Override
-
+    @Transactional
     public List<Employee> getAllEmployees() {
-        return employeeRepo.findAll();
+        return employeeDAO.getAllOdEmployees();
     }
 
     @Override
-
+    @Transactional
     public Employee getEmployeeById( int id ) {
-        Employee employee = employeeRepo.findById(id).get();
-        return employee;
+        Employee employee = employeeDAO.getEmployeeById(id);
+        return  employee;
     }
 
     @Override
-
+    @Transactional
     public void addEmployee( Employee employee ) {
-        employeeRepo.save(employee);
+        employeeDAO.addEmployee(employee);
     }
 
     @Override
-
+    @Transactional
     public void updateEmployee( Employee employee ) {
-        employeeRepo.save(employee);
+        employeeDAO.updateEmployee(employee);
     }
 
     @Override
-
+    @Transactional
     public void deleteEmployee( int id ) {
-
-        employeeRepo.deleteById(id);
+        employeeDAO.deleteEmployee(id);
     }
 }
